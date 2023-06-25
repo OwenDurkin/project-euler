@@ -1,26 +1,22 @@
-
 # We are tasked with finding the largest palindrome number
-# which is a product of two 3 digit numbers
+# which is a product of two 3-digit numbers
 
-'''
-Brainstorm:
+# We will brute force all products of two digit numbers and pick the largest one that is
+# a palindrome. There are ~900 three digit numbers [100,999] which means that
+# we will be checking 900*900 = 810_000 possibilities. This is computationally tenable.
 
-  A B C
-x D E F
-=======
-????
+def is_palindrome(s: str):
+    for i in range(len(s)//2):
+        if s[i] != s[len(s)-1-i]:
+            return False
+    return True
 
-
-10^ | 5   4   3   2   1   0
-====+========================
-    |             AF  BF  CF 
-    |         AE  BE  CE     
-    |     AD  BD  CD         
-=============================
-    |                        
-^^^ This is too complicated lets brute force.
-The problem is that each product of digits here *could be* greater than 9.
-
-'''
+if __name__ == '__main__':
+    biggest_palindrome = 0
+    for a in range(100,1000):
+        for b in range(100,1000):
+            if is_palindrome(str(a*b)):
+                biggest_palindrome = max(biggest_palindrome, a*b)
+    print(biggest_palindrome)
 
 
